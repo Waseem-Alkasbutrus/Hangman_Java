@@ -24,13 +24,14 @@ public class Logic {
     }
 
     private static void setupGame() {
-        int gameId = 0;
-        String[] gameType = {"movie", "country"};
-
         System.out.println("===================================");
         System.out.println("Choose the game type:");
         System.out.println("[0] Movie titles");
         System.out.println("[1] Country names");
+
+        int gameId = 0;
+        String[] gameType = {"movie", "country"};
+
         while (true) {
             try {
                 Scanner gameIdScanner = new Scanner(System.in);
