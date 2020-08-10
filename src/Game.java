@@ -4,39 +4,20 @@ import java.util.Scanner;
 
 public class Game {
     private static String title;
-    private static char[] hiddenTitle;
+    private static String hiddenTitle;
 
     Game() {
-        title = "[ERROR] PLEASE ENTER GAMEID!";
+        title = "[ERROR] PLEASE ENTER GAME-ID!";
         hiddenTitle = hideTitle(title);
     }
 
-    Game(int gameId) {
-        title = randomTitle(gameId);
+    Game(String FileName) {
+        title = randomTitle(FileName);
         hiddenTitle = hideTitle(title);
     }
 
-    /**
-     * generates a string that is a replica of the title, where all characters are turned into '_' (provided they are an int or an alphabet letter)
-     * @param title the title of the movie
-     * @return a string with all alphabetical letters are swapped for '_'
-     */
-    public static char[] hideTitle(String title) {
-
-        char[] hiddenTitle = title.toCharArray();
-
-        for(int i = 0; i < title.length(); i++) {
-            if((hiddenTitle[i] >= 'a' && hiddenTitle[i] <= 'z') || (hiddenTitle[i] <= '0' && hiddenTitle[i] >= '9')) {
-                hiddenTitle[i] = '_';
-            }
-        }
-        return hiddenTitle;
-    }
-
-    public static String randomTitle(int gameId) {
-        String[] gameTypes = {"Movies", "Countries"};
-        String gameType = gameTypes[gameId];
-        File titles = new File(gameType);
+    public static String randomTitle(String FileName) {
+        File titles = new File(FileName);
         double lineCount = 0;
             try {
                 Scanner fileCounter = new Scanner(titles);
@@ -68,13 +49,32 @@ public class Game {
         return titleChoice;
     }
 
+    /**
+     * generates a string that is a replica of the title, where all characters are turned into '_' (provided they are an int or an alphabet letter)
+     * @param title the title of the movie
+     * @return a string with all alphabetical letters are swapped for '_'
+     */
+    public static String hideTitle(String title) {
+
+        String hiddenTitle = "";
+        char[] titleChars = title.toCharArray();
+
+        for(int i = 0; i < title.length(); i++) {
+            if((titleChars[i] >= 'a' && titleChars[i] <= 'z') || (titleChars[i] <= '0' && titleChars[i] >= '9')) {
+                hiddenTitle += '_';
+            } else {
+                hiddenTitle += titleChars[i];
+            }
+        }
+        return hiddenTitle;
+    }
+
     public static String getTitle() {
         return title;
     }
 
-    public static char[] getHiddenTitle() {
+    public static String getHiddenTitle() {
         return hiddenTitle;
     }
 
 }
-
